@@ -57,4 +57,3 @@ UNCERTAINTY_RANGES = {
         "landfill_emission_factor": (0.03, 0.08),
     },
 }
-

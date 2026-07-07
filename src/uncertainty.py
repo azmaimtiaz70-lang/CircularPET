@@ -4,6 +4,8 @@ uncertainty.py
 Monte Carlo uncertainty analysis for the PET end-of-life pathway model.
 """
 
+import csv
+import os
 import random
 import statistics
 from model import mechanical_recycling, chemical_recycling, energy_recovery, landfill
@@ -65,4 +67,36 @@ def summarize(results, win_counts, n_simulations):
         vmax = max(values)
         win_pct = 100 * win_counts[name] / n_simulations
         print(f"{name:<22}{mean:>10.1f}{stdev:>10.1f}{vmin:>10.1f}{vmax:>10.1f}{win_pct:>9.1f}%")
+
         
+def save_summary_csv(results, win_counts, n_simulations):
+    out_dir = os.path.join(os.path.dirname(__file__), "..", "results", "tables")
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(out_dir, "uncertainty_summary.csv")
+
+    rows = []
+    for name, values in results.items():
+        rows.append({
+            "pathway": name,
+            "mean_kg_co2e": round(statistics.mean(values), 3),
+            "std_dev_kg_co2e": round(statistics.stdev(values), 3),
+            "min_kg_co2e": round(min(values), 3),
+            "max_kg_co2e": round(max(values), 3),
+            "win_count": win_counts[name],
+            "win_percent": round(100 * win_counts[name] / n_simulations, 3),
+        })
+
+    with open(out_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=rows[0].keys())
+        writer.writeheader()
+        writer.writerows(rows)
+
+    print(f"Saved: {out_path}")
+
+
+
+if __name__ == "__main__":
+    results, win_counts = run_simulation()
+    summarize(results, win_counts, N_SIMULATIONS)
+    save_summary_csv(results, win_counts, N_SIMULATIONS)
+    

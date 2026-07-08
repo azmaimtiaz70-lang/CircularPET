@@ -1,4 +1,4 @@
-# EcoCompAI
+# CircularPET
 
 A Python project for comparing PET end-of-life pathways using a baseline model and Monte Carlo uncertainty analysis.
 

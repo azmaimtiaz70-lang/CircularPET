@@ -12,7 +12,7 @@ from model import mechanical_recycling, chemical_recycling, energy_recovery, lan
 from parameters import UNCERTAINTY_RANGES
 
 N_SIMULATIONS = 5000
-
+RANDOM_SEED = 42
 
 def sample(range_tuple):
     low, high = range_tuple
@@ -24,6 +24,11 @@ def sample_params(pathway_name):
 
 
 def run_simulation():
+
+
+
+
+    random.seed(RANDOM_SEED)
     results = {
         "Mechanical Recycling": [],
         "Chemical Recycling": [],

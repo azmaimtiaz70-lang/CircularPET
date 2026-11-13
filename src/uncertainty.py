@@ -14,6 +14,7 @@ from parameters import UNCERTAINTY_RANGES
 N_SIMULATIONS = 5000
 RANDOM_SEED = 42
 
+
 def sample(range_tuple):
     low, high = range_tuple
     return random.uniform(low, high)
@@ -24,10 +25,6 @@ def sample_params(pathway_name):
 
 
 def run_simulation():
-
-
-
-
     random.seed(RANDOM_SEED)
     results = {
         "Mechanical Recycling": [],
@@ -43,6 +40,12 @@ def run_simulation():
         chem_params = sample_params("chemical")
         energy_params = sample_params("energy")
         landfill_params = sample_params("landfill")
+
+        # Shared inputs: one value per simulation, used by every pathway
+        chem_params["collection_rate"] = mech_params["collection_rate"]
+        chem_params["virgin_emission_factor"] = mech_params["virgin_emission_factor"]
+        chem_params["landfill_emission_factor"] = mech_params["landfill_emission_factor"]
+        landfill_params["landfill_emission_factor"] = mech_params["landfill_emission_factor"]
 
         run_results = {
             "Mechanical Recycling": mechanical_recycling(mech_params),
@@ -73,7 +76,7 @@ def summarize(results, win_counts, n_simulations):
         win_pct = 100 * win_counts[name] / n_simulations
         print(f"{name:<22}{mean:>10.1f}{stdev:>10.1f}{vmin:>10.1f}{vmax:>10.1f}{win_pct:>9.1f}%")
 
-        
+
 def save_summary_csv(results, win_counts, n_simulations):
     out_dir = os.path.join(os.path.dirname(__file__), "..", "results", "tables")
     os.makedirs(out_dir, exist_ok=True)
@@ -99,9 +102,7 @@ def save_summary_csv(results, win_counts, n_simulations):
     print(f"Saved: {out_path}")
 
 
-
 if __name__ == "__main__":
     results, win_counts = run_simulation()
     summarize(results, win_counts, N_SIMULATIONS)
     save_summary_csv(results, win_counts, N_SIMULATIONS)
-    

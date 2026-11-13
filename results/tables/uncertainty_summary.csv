@@ -1,5 +1,5 @@
 pathway,mean_kg_co2e,std_dev_kg_co2e,min_kg_co2e,max_kg_co2e,win_count,win_percent
-Mechanical Recycling,-932.472,147.339,-1416.538,-571.543,4717,94.34
-Chemical Recycling,-471.821,197.683,-1074.528,-32.961,162,3.24
-Energy Recovery,514.302,708.22,-1650.482,2230.793,121,2.42
-Landfill,54.965,14.528,30.002,79.999,0,0.0
+Mechanical Recycling,-932.472,147.339,-1416.538,-571.543,4643,92.86
+Chemical Recycling,-470.997,200.846,-1125.861,-22.631,8,0.16
+Energy Recovery,158.886,656.29,-1654.484,1526.89,349,6.98
+Landfill,55.05,14.383,30.045,79.979,0,0.0

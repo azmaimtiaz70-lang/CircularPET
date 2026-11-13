@@ -23,7 +23,7 @@ BASELINE_PARAMS = {
         "landfill_emission_factor": 0.05,
     },
     "energy": {
-        "combustion_emission_factor": 2.50,
+        "combustion_emission_facto": 2.50,
         "energy_recovered_per_kg": 20.0,
         "grid_emission_factor": 0.10,
     },
@@ -49,7 +49,7 @@ UNCERTAINTY_RANGES = {
         "landfill_emission_factor": (0.03, 0.08),
     },
     "energy": {
-        "combustion_emission_factor": (2.00, 3.00),
+        "combustion_emission_factor": (2.00, 2.29),
         "energy_recovered_per_kg": (15.0, 25.0),
         "grid_emission_factor": (0.05, 0.15),
     },
